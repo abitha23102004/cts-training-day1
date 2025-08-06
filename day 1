@@ -1,0 +1,206 @@
+Product table
+
+
+1. Retrieve all columns from the product table.
+mysql> select * from products;
++------------+--------------+-------------+------------+
+| product_id | product_name | category    | unit_price |
++------------+--------------+-------------+------------+
+|        101 | Laptop       | Electronics |     500.00 |
+|        102 | Smartphone   | Electronics |     300.00 |
+|        103 | Headphones   | Electronics |      30.00 |
+|        104 | Keyboard     | Electronics |      20.00 |
+|        105 | Mouse        | Electronics |      15.00 |
++------------+--------------+-------------+------------+
+5 rows in set (0.06 sec)
+2. Retrieve the product_name and unit_price from the Products table.
+
+mysql> select product_name,unit_price from products;
++--------------+------------+
+| product_name | unit_price |
++--------------+------------+
+| Laptop       |     500.00 |
+| Smartphone   |     300.00 |
+| Headphones   |      30.00 |
+| Keyboard     |      20.00 |
+| Mouse        |      15.00 |
++--------------+------------+
+5 rows in set (0.00 sec)
+3. Filter the Products table to show only products in the 'Electronics' 
+category.
+
+mysql> select * from products where category='electronics';
++------------+--------------+-------------+------------+
+| product_id | product_name | category    | unit_price |
++------------+--------------+-------------+------------+
+|        101 | Laptop       | Electronics |     500.00 |
+|        102 | Smartphone   | Electronics |     300.00 |
+|        103 | Headphones   | Electronics |      30.00 |
+|        104 | Keyboard     | Electronics |      20.00 |
+|        105 | Mouse        | Electronics |      15.00 |
++------------+--------------+-------------+------------+
+5 rows in set (0.12 sec)
+
+4.Retrieve the product_id and product_name from the Products table for products with a unit_price greater than $100.
+mysql> select product_id,product_name from products where unit_price>100;
++------------+--------------+
+| product_id | product_name |
++------------+--------------+
+|        101 | Laptop       |
+|        102 | Smartphone   |
++------------+--------------+
+2 rows in set (0.02 sec)
+5. Calculate the average unit_price of products in the Products table. 
+mysql> select avg(unit_price)as average_price from products;
++---------------+
+| average_price |
++---------------+
+|    173.000000 |
++---------------+
+1 row in set (0.22 sec)
+
+6. Retrieve product_name and unit_price from the Products table with the Highest Unit Price
+
+mysql> select product_name,unit_price from products where unit_price=(select max(unit_price)from products);
++--------------+------------+
+| product_name | unit_price |
++--------------+------------+
+| Laptop       |     500.00 |
++--------------+------------+
+1 row in set (0.21 sec)
+ 7. Retrieve the product_name and unit_price from the Products table, ordering the results by unit_price in descending order. 
+
+mysql> select product_name,unit_price from products order by unit_price desc;
++--------------+------------+
+| product_name | unit_price |
++--------------+------------+
+| Laptop       |     500.00 |
+| Smartphone   |     300.00 |
+| Headphones   |      30.00 |
+| Keyboard     |      20.00 |
+| Mouse        |      15.00 |
++--------------+------------+
+5 rows in set (0.06 sec)
+8. Retrieve the product_name and unit_price from the Products table, filtering the unit_price to show only values between $20 and $600.
+
+mysql> select product_name,unit_price from products where unit_price between 20 and 600;
++--------------+------------+
+| product_name | unit_price |
++--------------+------------+
+| Laptop       |     500.00 |
+| Smartphone   |     300.00 |
+| Headphones   |      30.00 |
+| Keyboard     |      20.00 |
++--------------+------------+
+4 rows in set (0.06 sec)
+9. Retrieve the product_name and category from the Products table, ordering the results bycategory in ascending order.
+
+mysql> select product_name,category from products order by category asc;
++--------------+-------------+
+| product_name | category    |
++--------------+-------------+
+| Laptop       | Electronics |
+| Smartphone   | Electronics |
+| Headphones   | Electronics |
+| Keyboard     | Electronics |
+| Mouse        | Electronics |
++--------------+-------------+
+5 rows in set (0.07 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          Sales Table
+
+1.Retrieve all columns from the Sales table.
+mysql> select * from sales;
++---------+------------+---------------+------------+-------------+
+| sale_id | product_id | quantity_sold | sale_date  | total_price |
++---------+------------+---------------+------------+-------------+
+|       1 |        101 |             5 | 2024-01-01 |     2500.00 |
+|       2 |        102 |             3 | 2024-01-02 |      900.00 |
+|       3 |        103 |             2 | 2024-01-02 |       60.00 |
+|       4 |        104 |             4 | 2024-01-03 |       80.00 |
+|       5 |        105 |             6 | 2024-01-03 |       90.00 |
++---------+------------+---------------+------------+-------------+
+5 rows in set (0.00 sec)
+
+
+2.Retrieve the sale_id and sale_date from the Sales table.
+mysql> select sale_id,sale_date from sales;
++---------+------------+
+| sale_id | sale_date  |
++---------+------------+
+|       1 | 2024-01-01 |
+|       2 | 2024-01-02 |
+|       3 | 2024-01-02 |
+|       4 | 2024-01-03 |
+|       5 | 2024-01-03 |
++---------+------------+
+5 rows in set (0.00 sec)
+
+3.Filter the Sales table to show only sales with a total_price greater than $100
+mysql> select*from sales where total_price>100;
++---------+------------+---------------+------------+-------------+
+| sale_id | product_id | quantity_sold | sale_date  | total_price |
++---------+------------+---------------+------------+-------------+
+|       1 |        101 |             5 | 2024-01-01 |     2500.00 |
+|       2 |        102 |             3 | 2024-01-02 |      900.00 |
++---------+------------+---------------+------------+-------------+
+2 rows in set (0.00 sec)
+4.Retrieve the sale_id and total_price from the Sales table for sales made on January 3, 2024.
++---------+-------------+
+| sale_id | total_price |
++---------+-------------+
+|       4 |       80.00 |
+|       5 |       90.00 |
++---------+-------------+
+2 rows in set (0.06 sec)
+5.Calculate the total revenue generated from all sales in the Sales table.
+mysql> select sum(total_price)as total_revenue from sales;
++---------------+
+| total_revenue |
++---------------+
+|       3630.00 |
++---------------+
+1 row in set (0.00 sec)
+6.Calculate the total quantity_sold from the Sales table.
+mysql> select sum(quantity_sold)as total_quantity_sold from sales;
++---------------------+
+| total_quantity_sold |
++---------------------+
+|                  20 |
++---------------------+
+1 row in set (0.00 sec)
+
+7. Retrieve the sale_id, product_id, and total_price from the Sales table for sales with a quantity_sold greater than 4.
+mysql> SELECT sale_id, product_id, total_price FROM Sales
+    -> WHERE quantity_sold > 4;
++---------+------------+-------------+
+| sale_id | product_id | total_price |
++---------+------------+-------------+
+|       1 |        101 |     2500.00 |
+|       5 |        105 |       90.00 |
++---------+------------+-------------+
+2 rows in set (0.00 sec)
+
+8. Calculate the average total_price of sales in the Sales table.
+mysql> SELECT AVG(total_price) AS average_sale_price FROM Sales;
++--------------------+
+| average_sale_price |
++--------------------+
+|         726.000000 |
++--------------------+
+1 row in set (0.00 sec)
+
+
+
